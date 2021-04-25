@@ -11,7 +11,6 @@ import addCartToDB from '../../apiCalls/addCart';
 import getInventory from '../../apiCalls/getInventory';
 
 const GoodsProviderItem = ({ item }) => {
-    // console.log(item)
     const [merchantModalVisible, setMerchantModalVisible] = useState(false)
     const userData = useSelector(state => state.user.user)
 
@@ -49,32 +48,36 @@ const GoodsProviderItem = ({ item }) => {
         dispatch(resetItems())
         setMerchantModalVisible(false)
     }
-
     return (
         <View>
-            <TouchableOpacity style={styles.itemContainer} onPress={() => setMerchantModalVisible(true)}>
-                <Text style={styles.itemName} >{item.shopName}</Text>
-                <Text style={styles.itemName} >{Math.ceil(item.distance)} km</Text>
-            </TouchableOpacity>
-            <Modal
-                animationType="slide"
-                visible={merchantModalVisible}
-                onRequestClose={() => {
-                    setMerchantModalVisible(false)
-                }}
-            >
-                <View style={styles.header2}>
-                    <TouchableOpacity onPress={() => setMerchantModalVisible(false)} style={styles.modalHeader} >
-                        <Image source={require('../../../assets/dropdown.png')} style={styles.tinyLogo} />
+            {inventory &&
+                <View>
+                    <TouchableOpacity style={styles.itemContainer} onPress={() => setMerchantModalVisible(true)}>
+                        <Image style={styles.logo} source={{ uri: item.imageUrl }} />
+                        <Text style={styles.itemName} >{item.shopName}</Text>
+                        <Text style={styles.itemName} >{Math.ceil(item.distance)} km</Text>
                     </TouchableOpacity>
-                    <TitleText>{item.shopName}</TitleText>
+                    <Modal
+                        animationType="slide"
+                        visible={merchantModalVisible}
+                        onRequestClose={() => {
+                            setMerchantModalVisible(false)
+                        }}
+                    >
+                        <View style={styles.header2}>
+                            <TouchableOpacity onPress={() => setMerchantModalVisible(false)} style={styles.modalHeader} >
+                                <Image source={require('../../../assets/dropdown.png')} style={styles.tinyLogo} />
+                            </TouchableOpacity>
+                            <TitleText>{item.shopName}</TitleText>
+                        </View>
+                        <View style={styles.itemModalContainer} >
+                            <TitleText style={{ color: 'black' }} >Inventory</TitleText>
+                            <InventoryHome inventory={inventory} />
+                            <MainButton onPress={addCustomerCart} style={{ marginBottom: 100 }}>Add Cart</MainButton>
+                        </View>
+                    </Modal>
                 </View>
-                <View style={styles.itemModalContainer} >
-                    <TitleText style={{ color: 'black' }} >Inventory</TitleText>
-                    <InventoryHome inventory={inventory} />
-                    <MainButton onPress={addCustomerCart} style={{ marginBottom: 100 }}>Add Cart</MainButton>
-                </View>
-            </Modal>
+            }
         </View>
     )
 }
@@ -82,8 +85,9 @@ const GoodsProviderItem = ({ item }) => {
 const styles = StyleSheet.create({
     itemContainer: {
         flex: 1,
-        flexDirection: 'row',
-        justifyContent: 'space-between'
+        marginLeft: 10,
+        justifyContent: 'space-between',
+        alignItems: 'center'
     },
     itemName: {
         fontFamily: 'open-sans',
@@ -101,12 +105,16 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     tinyLogo: {
-        height: 40,
-        width: 40
+        height: 25,
+        width: 25
     },
     itemModalContainer: {
         flex: 1,
         alignItems: 'center'
+    },
+    logo: {
+        width: Dimensions.get('window').width * 0.23,
+        height: 100,
     }
 })
 

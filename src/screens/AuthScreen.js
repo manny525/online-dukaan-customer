@@ -25,7 +25,6 @@ const AuthScreen = (props) => {
         const body = await JSON.stringify({
             email
         })
-        console.log(body)
         const user = await findUser(body)
         return user
     }
@@ -72,7 +71,6 @@ const AuthScreen = (props) => {
             if (!existingUser) {
                 setUserLoaded(false)
                 const userData = await checkExistingUser(email)
-                console.log('new user')
                 setUserLoaded(true)
                 if (userData.existingUser) {
                     setExistingUser({
@@ -86,7 +84,6 @@ const AuthScreen = (props) => {
                     })
                 }
                 else {
-                    console.log('sign up')
                     setVerificationStage(<SignUpForm email={email} setLogin={props.setLogin} />)
                 }
             }
@@ -121,7 +118,6 @@ const AuthScreen = (props) => {
             if (existingUser) {
                 setUserLoaded(false)
                 const merchants = await onGetMerchants()
-                console.log(merchants)
                 await dispatch(setGoodsProviders(merchants.goodsProviders))
                 await dispatch(setServiceProviders(merchants.serviceProviders))
                 login()

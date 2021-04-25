@@ -9,23 +9,10 @@ const GoodsProviderList = ({ category }) => {
     const [openList, setOpenList] = useState(false)
     return (
         <View>
-            <TouchableOpacity activeOpacity={0.4} onPress={() => {
-                if (openList) {
-                    setImgSrc(require('../../../assets/dropdown.png'))
-                }
-                else {
-                    setImgSrc(require('../../../assets/dropup.png'))
-                }
-                setOpenList(!openList)
-            }}>
-                <View style={styles.categoryContainer}>
-                    <Text style={styles.category} >{category.type.toUpperCase()}</Text>
-                    <Image style={styles.tinyLogo} source={imgSrc} />
-                </View>
-            </TouchableOpacity>
-            {openList &&
-                <GoodsProviderItems items={category.merchants} />
-            }
+            <View style={styles.header2}>
+                <Text style={styles.category} >{category.type.toUpperCase()}</Text>
+            </View>
+            <GoodsProviderItems items={category.merchants} />
         </View>
     )
 }
@@ -50,12 +37,13 @@ const styles = StyleSheet.create({
         width: 16
     },
     header2: {
+        marginTop: '3%',
         width: Dimensions.get('window').width,
-        height: 70,
+        height: 40,
         justifyContent: 'center',
-        alignItems: 'center',
+        paddingLeft: '2%',
         backgroundColor: colors.primary,
-        fontSize: 18
+        fontSize: 25
     }
 })
 

@@ -15,17 +15,19 @@ const GoodsProviderHome = () => {
     const merchants = useSelector(state => state.merchants)
     const [goodsProviders, setGoodsProvider] = useState([{
         type: 'grocery',
-        merchants: merchants.goodsProviders
+        merchants: typeSelector(merchants.goodsProviders, 'grocery')
     }, {
         type: 'medical',
         merchants: typeSelector(merchants.goodsProviders, 'medical')
     }])
 
+    console.log(merchants);
+
     return (
         <View style={styles.screen} >
-            <View style={{...styles.header2, marginTop: 8}}>
+            {/* <View style={{...styles.header2, marginTop: 8}}>
                 <TitleText style={{fontSize: 15}} >GOODS PROVIDERS</TitleText>
-            </View>
+            </View> */}
             <FlatList
                 data={goodsProviders}
                 renderItem={({ item }) => {

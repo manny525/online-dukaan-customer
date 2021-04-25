@@ -15,6 +15,7 @@ const GoodsProviderItems = ({ items }) => {
                     )
                 }}
                 keyExtractor={item => item._id}
+                horizontal={true}
             />
         </View>
     )
@@ -24,8 +25,7 @@ const styles = StyleSheet.create({
     itemsContainer: {
         marginTop: 5,
         flex: 1,
-        width: '80%',
-        marginLeft: 30,
+        marginLeft: '1%',
         alignItems: 'stretch'
     }
 })

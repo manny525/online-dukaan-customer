@@ -11,7 +11,6 @@ const HomePage = () => {
         <View style={styles.container} >
             {/* <Header title='MERCHANTS' /> */}
             <GoodsProviderHome />
-            <ServiceProviderHome />
         </View>
     )
 }
