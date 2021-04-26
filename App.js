@@ -16,6 +16,8 @@ import cartItmesReducer from './src/store/reducers/cartItems';
 import cardReducer from './src/store/reducers/card';
 import Header from './src/components/Header';
 
+console.disableYellowBox = true;
+
 const rootReducer = combineReducers({
   user: userReducer,
   cart: cartReducer,
